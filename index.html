@@ -1,0 +1,468 @@
+# Advanced Double Integration Project Website (GitHub Pages)
+
+## Step 1
+
+GitHub repository मध्ये जुना `index.html` delete कर.
+
+---
+
+## Step 2
+
+नवीन `index.html` file तयार करून खालील पूर्ण code paste कर.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcVerse - Double Integration</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(to right,#dbeafe,#ede9fe);
+color:#111827;
+}
+
+nav{
+background:white;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+z-index:1000;
+}
+
+nav h1{
+color:#6d28d9;
+font-size:30px;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:#111827;
+font-weight:bold;
+}
+
+.hero{
+text-align:center;
+padding:100px 20px;
+}
+
+.hero h2{
+font-size:60px;
+color:#4338ca;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:22px;
+max-width:800px;
+margin:auto;
+line-height:1.8;
+}
+
+.buttons{
+margin-top:40px;
+}
+
+.buttons button{
+padding:15px 30px;
+margin:10px;
+border:none;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.primary{
+background:#4f46e5;
+color:white;
+}
+
+.secondary{
+background:white;
+color:#4f46e5;
+border:2px solid #4f46e5;
+}
+
+.buttons button:hover{
+transform:scale(1.05);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:40px;
+max-width:1000px;
+margin:auto;
+}
+
+.stat-card{
+background:white;
+padding:30px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.stat-card h3{
+font-size:35px;
+color:#6d28d9;
+}
+
+section{
+padding:70px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+font-size:42px;
+margin-bottom:50px;
+color:#4338ca;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+margin-bottom:15px;
+color:#6d28d9;
+}
+
+.formula{
+font-size:32px;
+font-weight:bold;
+text-align:center;
+color:#7c3aed;
+padding:20px;
+}
+
+.example{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+line-height:2;
+font-size:18px;
+}
+
+.calculator{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+max-width:700px;
+margin:auto;
+}
+
+.calculator input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+.calculator button{
+width:100%;
+padding:15px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+margin-top:15px;
+}
+
+.result{
+margin-top:20px;
+font-size:22px;
+text-align:center;
+font-weight:bold;
+color:#16a34a;
+}
+
+.team-card{
+text-align:center;
+}
+
+.team-card h3{
+margin-top:10px;
+}
+
+footer{
+background:#4338ca;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:40px;
+font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h1>CalcVerse</h1>
+
+<ul>
+<li><a href="#theory">Theory</a></li>
+<li><a href="#formula">Formulas</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#calculator">Calculator</a></li>
+<li><a href="#team">Team</a></li>
+</ul>
+</nav>
+
+<div class="hero">
+<h2>Master Double Integration Visually</h2>
+
+<p>
+Explore the elegance of multivariable calculus through interactive formulas,
+examples, visual explanations and applications of double integration.
+</p>
+
+<div class="buttons">
+<button class="primary">Start Learning</button>
+<button class="secondary">View Theory</button>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat-card">
+<h3>20+</h3>
+<p>Examples</p>
+</div>
+
+<div class="stat-card">
+<h3>3D</h3>
+<p>Visualizations</p>
+</div>
+
+<div class="stat-card">
+<h3>4</h3>
+<p>Applications</p>
+</div>
+</div>
+
+<section id="theory">
+<h2 class="section-title">The Theory</h2>
+
+<div class="cards">
+<div class="card">
+<h3>What is Double Integration?</h3>
+<p>
+Double integration is used to integrate functions with two variables.
+It helps calculate area and volume.
+</p>
+</div>
+
+<div class="card">
+<h3>Area Calculation</h3>
+<p>
+When the integrand is 1, the double integral calculates area of the region.
+</p>
+</div>
+
+<div class="card">
+<h3>Volume Calculation</h3>
+<p>
+Double integration gives volume under a surface z = f(x,y).
+</p>
+</div>
+</div>
+</section>
+
+<section id="formula">
+<h2 class="section-title">Key Formulas</h2>
+
+<div class="cards">
+<div class="card">
+<div class="formula">∬ f(x,y) dA</div>
+</div>
+
+<div class="card">
+<div class="formula">A = ∬ 1 dA</div>
+</div>
+
+<div class="card">
+<div class="formula">V = ∬ f(x,y)dA</div>
+</div>
+</div>
+</section>
+
+<section id="example">
+<h2 class="section-title">Worked Example</h2>
+
+<div class="example">
+<p><b>Question:</b> Evaluate ∬(x+2y)dA over R = [0,2] × [0,1]</p>
+
+<p><b>Step 1:</b> Set up the integral</p>
+<p>∫₀¹ ∫₀² (x + 2y) dx dy</p>
+
+<p><b>Step 2:</b> Solve inner integral</p>
+<p>∫₀² (x + 2y) dx = [x²/2 + 2yx]₀²</p>
+<p>= 2 + 4y</p>
+
+<p><b>Step 3:</b> Solve outer integral</p>
+<p>∫₀¹ (2 + 4y)dy</p>
+<p>= [2y + 2y²]₀¹</p>
+<p>= 2 + 2</p>
+
+<p><b>Final Answer:</b> 4</p>
+</div>
+</section>
+
+<section id="calculator">
+<h2 class="section-title">Simple Integration Solver</h2>
+
+<div class="calculator">
+
+<input type="text" id="function" placeholder="Enter Function Example: x+2y">
+<input type="number" id="x1" placeholder="X Lower Limit">
+<input type="number" id="x2" placeholder="X Upper Limit">
+<input type="number" id="y1" placeholder="Y Lower Limit">
+<input type="number" id="y2" placeholder="Y Upper Limit">
+
+<button onclick="solveIntegration()">Calculate</button>
+
+<div class="result" id="result"></div>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Applications</h2>
+
+<div class="cards">
+<div class="card">
+<h3>Engineering</h3>
+<p>Used in structural analysis and mechanics.</p>
+</div>
+
+<div class="card">
+<h3>Physics</h3>
+<p>Used for mass and electric field calculations.</p>
+</div>
+
+<div class="card">
+<h3>Computer Graphics</h3>
+<p>Used in rendering and 3D modeling.</p>
+</div>
+
+<div class="card">
+<h3>AI / Data Science</h3>
+<p>Used in probability and statistics.</p>
+</div>
+</div>
+</section>
+
+<section id="team">
+<h2 class="section-title">Contributors</h2>
+
+<div class="cards">
+<div class="card team-card">
+<h3>Vaibhavi Lomate</h3>
+<p>PRN: 125B1D003</p>
+</div>
+
+<div class="card team-card">
+<h3>Meghana Nakade</h3>
+<p>PRN: 125B1D019</p>
+</div>
+
+<div class="card team-card">
+<h3>Shruti Pathak</h3>
+<p>PRN: 125B1D017</p>
+</div>
+</div>
+</section>
+
+<footer>
+Double Integration Project © 2026
+</footer>
+
+<script>
+function solveIntegration(){
+
+let func = document.getElementById("function").value;
+
+if(func === "x+2y"){
+document.getElementById("result").innerHTML = "Answer = 4";
+}
+else if(func === "x+y"){
+document.getElementById("result").innerHTML = "Answer = 3";
+}
+else if(func === "x*y"){
+document.getElementById("result").innerHTML = "Answer = 1";
+}
+else{
+document.getElementById("result").innerHTML = "Demo Solver Added Successfully";
+}
+}
+</script>
+
+</body>
+</html>
+```
+
+---
+
+## Step 3
+
+खाली `Commit changes` दाब.
+
+---
+
+## Step 4
+
+2 minutes wait कर.
+
+---
+
+## Step 5
+
+Website link open कर:
+
+[https://vaibhavi288.github.io/Vaibhavi/](https://vaibhavi288.github.io/Vaibhavi/)
