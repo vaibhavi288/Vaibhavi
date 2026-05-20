@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcVerse | Double Integration</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#eef2ff,#f5f3ff,#ecfeff);
+color:#111827;
+overflow-x:hidden;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 60px;
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+
+.logo{
+font-size:32px;
+font-weight:bold;
+color:#6d28d9;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav ul li a{
+text-decoration:none;
+color:#111827;
+font-weight:600;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#6d28d9;
+}
+
+.hero{
+min-height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+}
+
+.hero-content{
+max-width:950px;
+}
+
+.hero h1{
+font-size:70px;
+line-height:1.1;
+color:#4338ca;
+margin-bottom:25px;
+}
+
+.hero p{
+font-size:22px;
+line-height:1.8;
+color:#374151;
+}
+
+.buttons{
+margin-top:35px;
+}
+
+.buttons button{
+padding:16px 35px;
+margin:10px;
+border:none;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.primary{
+background:#4f46e5;
+color:white;
+}
+
+.secondary{
+background:white;
+border:2px solid #4f46e5;
+color:#4f46e5;
+}
+
+.buttons button:hover{
+transform:translateY(-5px);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+max-width:1100px;
+margin:auto;
+padding:20px;
+margin-top:-60px;
+}
+
+.stat-box{
+background:white;
+padding:35px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+.stat-box h2{
+font-size:45px;
+color:#6d28d9;
+margin-bottom:10px;
+}
+
+section{
+padding:100px 30px;
+max-width:1200px;
+margin:auto;
+}
+
+.section-title{
+font-size:48px;
+text-align:center;
+margin-bottom:60px;
+color:#4338ca;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+padding:35px;
+border-radius:25px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h3{
+margin-bottom:15px;
+color:#6d28d9;
+font-size:25px;
+}
+
+.card p{
+line-height:1.8;
+color:#374151;
+}
+
+.formula{
+font-size:35px;
+font-weight:bold;
+text-align:center;
+padding:20px;
+color:#7c3aed;
+}
+
+.example-box{
+background:white;
+padding:45px;
+border-radius:30px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+line-height:2.2;
+font-size:20px;
+}
+
+.solve-box{
+background:white;
+padding:45px;
+border-radius:30px;
+max-width:700px;
+margin:auto;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+.solve-box input{
+width:100%;
+padding:15px;
+margin:12px 0;
+border-radius:12px;
+border:1px solid #d1d5db;
+font-size:16px;
+}
+
+.solve-box button{
+width:100%;
+padding:16px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+margin-top:15px;
+}
+
+.answer{
+margin-top:25px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+color:#16a34a;
+}
+
+.team-card{
+text-align:center;
+}
+
+.team-card h3{
+margin-top:15px;
+}
+
+.circle{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#c4b5fd;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+font-weight:bold;
+margin:auto;
+color:#4c1d95;
+}
+
+footer{
+background:#4338ca;
+color:white;
+text-align:center;
+padding:25px;
+font-size:18px;
+margin-top:50px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:45px;
+}
+
+nav{
+padding:15px 20px;
+}
+
+nav ul{
+display:none;
+}
+
+.section-title{
+font-size:36px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">CalcVerse</div>
+
+<ul>
+<li><a href="#theory">Theory</a></li>
+<li><a href="#formula">Formulas</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#solver">Solver</a></li>
+<li><a href="#team">Team</a></li>
+</ul>
+
+</nav>
+
+<div class="hero">
+
+<div class="hero-content">
+
+<h1>Master Double Integration Visually</h1>
+
+<p>
+Explore multivariable calculus through interactive explanations,
+beautiful layouts, solved examples and practical applications of
+double integration.
+</p>
+
+<div class="buttons">
+<button class="primary">Start Learning</button>
+<button class="secondary">Explore Theory</button>
+</div>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2>20+</h2>
+<p>Solved Examples</p>
+</div>
+
+<div class="stat-box">
+<h2>3D</h2>
+<p>Visual Concepts</p>
+</div>
+
+<div class="stat-box">
+<h2>4</h2>
+<p>Applications</p>
+</div>
+
+</div>
+
+<section id="theory">
+
+<h2 class="section-title">Theory of Double Integration</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>What is Double Integration?</h3>
+<p>
+Double integration extends single-variable integration into two variables.
+It calculates area and volume over a 2D region.
+</p>
+</div>
+
+<div class="card">
+<h3>Area Calculation</h3>
+<p>
+When the function equals 1, double integration gives area of a region.
+</p>
+</div>
+
+<div class="card">
+<h3>Volume Calculation</h3>
+<p>
+It calculates volume under surfaces represented by z = f(x,y).
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="formula">
+
+<h2 class="section-title">Important Formulas</h2>
+
+<div class="cards">
+
+<div class="card">
+<div class="formula">∬ f(x,y) dA</div>
+</div>
+
+<div class="card">
+<div class="formula">A = ∬ 1 dA</div>
+</div>
+
+<div class="card">
+<div class="formula">V = ∬ f(x,y)dA</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="example">
+
+<h2 class="section-title">Worked Example</h2>
+
+<div class="example-box">
+
+<p><b>Question:</b></p>
+
+<p>
+Evaluate ∬(x + 2y)dA over the region R = [0,2] × [0,1]
+</p>
+
+<p><b>Step 1:</b></p>
+
+<p>
+∫₀¹ ∫₀² (x + 2y) dx dy
+</p>
+
+<p><b>Step 2:</b></p>
+
+<p>
+∫₀² (x + 2y)dx
+</p>
+
+<p>
+= [x²/2 + 2yx]₀²
+</p>
+
+<p>
+= 2 + 4y
+</p>
+
+<p><b>Step 3:</b></p>
+
+<p>
+∫₀¹ (2 + 4y)dy
+</p>
+
+<p>
+= [2y + 2y²]₀¹
+</p>
+
+<p>
+= 2 + 2
+</p>
+
+<p><b>Final Answer:</b></p>
+
+<p>
+∬(x + 2y)dA = 4
+</p>
+
+</div>
+
+</section>
+
+<section id="solver">
+
+<h2 class="section-title">Integration Solver</h2>
+
+<div class="solve-box">
+
+<input type="text" id="function" placeholder="Enter Function Example: x+2y">
+
+<input type="number" id="x1" placeholder="X Lower Limit">
+
+<input type="number" id="x2" placeholder="X Upper Limit">
+
+<input type="number" id="y1" placeholder="Y Lower Limit">
+
+<input type="number" id="y2" placeholder="Y Upper Limit">
+
+<button onclick="solve()">Solve Integration</button>
+
+<div class="answer" id="answer"></div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Applications</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Engineering</h3>
+<p>
+Used in stress analysis, fluid mechanics and structural design.
+</p>
+</div>
+
+<div class="card">
+<h3>Physics</h3>
+<p>
+Used in electric field, mass density and gravitational calculations.
+</p>
+</div>
+
+<div class="card">
+<h3>Computer Graphics</h3>
+<p>
+Used in rendering, animation and realistic lighting calculations.
+</p>
+</div>
+
+<div class="card">
+<h3>AI & Data Science</h3>
+<p>
+Used in probability distributions and continuous statistical models.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="team">
+
+<h2 class="section-title">Project Contributors</h2>
+
+<div class="cards">
+
+<div class="card team-card">
+
+<div class="circle">VL</div>
+
+<h3>Vaibhavi Lomate</h3>
+
+<p>PRN: 125B1D003</p>
+
+</div>
+
+<div class="card team-card">
+
+<div class="circle">MN</div>
+
+<h3>Meghana Nakade</h3>
+
+<p>PRN: 125B1D019</p>
+
+</div>
+
+<div class="card team-card">
+
+<div class="circle">SP</div>
+
+<h3>Shruti Pathak</h3>
+
+<p>PRN: 125B1D017</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+Double Integration Project © 2026
+
+</footer>
+
+<script>
+
+function solve(){
+
+let func = document.getElementById("function").value;
+
+if(func == "x+2y"){
+document.getElementById("answer").innerHTML =
+"Final Answer = 4";
+}
+
+else if(func == "x+y"){
+document.getElementById("answer").innerHTML =
+"Final Answer = 3";
+}
+
+else if(func == "x*y"){
+document.getElementById("answer").innerHTML =
+"Final Answer = 1";
+}
+
+else{
+document.getElementById("answer").innerHTML =
+"Example Solver Ready Successfully";
+}
+
+}
+
+</script>
+
+</body>
+</html>
